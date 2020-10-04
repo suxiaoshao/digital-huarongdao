@@ -18,3 +18,9 @@ class MyImage(object):
             for w_i in range(3):
                 self.cut_image.append(
                     self.img_data[h_i * h_3:(h_i + 1) * h_3, w_i * w_3:(w_i + 1) * w_3])
+
+    def draw(self):
+        cv2.namedWindow("Image")
+        cv2.imshow("Image", self.img_data)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
