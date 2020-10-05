@@ -2,6 +2,7 @@ from image import main_image, image
 import os
 from typing import List
 import time
+from util import get_swaps
 
 
 def read_source_image() -> List[image.MyImage]:
@@ -20,9 +21,9 @@ def main():
     times = time.time()
     source_list = read_source_image()
     for i in source_list:
-        serial_number = info_data.get_serial_number(i)
-        if serial_number:
+        if serial_number := info_data.get_serial_number(i):
             print(serial_number)
+            print(get_swaps.get_swaps(serial_number))
     print(time.time() - times)
 
 
