@@ -14,7 +14,7 @@ class MainImage(image.MyImage):
         self.uuid: str = info_data['uuid']
         super(MainImage, self).__init__(b64decode(info_data['img']))
 
-    def to_get_serial_number(self, other_image: image.MyImage) -> [List[int]]:
+    def get_serial_number(self, other_image: image.MyImage) -> [List[int]]:
         flag_list: List[int] = [0] * len(self.cut_image)
         flag = 0
         for i, self_cuy_image in enumerate(self.cut_image):

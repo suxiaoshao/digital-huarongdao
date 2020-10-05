@@ -20,7 +20,7 @@ def main():
     times = time.time()
     source_list = read_source_image()
     for i in source_list:
-        serial_number = info_data.to_get_serial_number(i)
+        serial_number = info_data.get_serial_number(i)
         if serial_number:
             print(serial_number)
     print(time.time() - times)
