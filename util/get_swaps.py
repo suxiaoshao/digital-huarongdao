@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 from collections import deque
 from copy import deepcopy
 
@@ -40,7 +40,7 @@ def get_swaps(serial_number: List[int]) -> str:
     target_str = ''.join(str(i) if i in serial_number else "0" for i in range(1, 10))
     q = deque()
     q.append(QueueItem(now_str, ''))
-    seen_str: List[str] = [now_str]
+    seen_str: Set[str] = set(now_str)
     max_path = 0
     while q:
         q_item: QueueItem = q.popleft()
@@ -52,6 +52,6 @@ def get_swaps(serial_number: List[int]) -> str:
         new_item_list: List[QueueItem] = q_item.get_next()
         for new_item in new_item_list:
             if new_item.now_str not in seen_str:
-                seen_str.append(new_item.now_str)
+                seen_str.add(new_item.now_str)
                 q.append(new_item)
     return ''

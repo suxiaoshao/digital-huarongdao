@@ -1,17 +1,15 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default class App extends React.Component<{}, {}> {
-    render() {
-        console.log(111);
-        return (
-            <h1
-                className={"my-h"}
-                onClick={() => {
-                    console.log(222);
-                }}
-            >
-                11111
-            </h1>
-        );
-    }
+export default function App(): JSX.Element {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          111
+        </Route>
+        <Route path="/game">222</Route>
+      </Switch>
+    </Router>
+  );
 }

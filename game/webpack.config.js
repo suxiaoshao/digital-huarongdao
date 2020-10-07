@@ -58,7 +58,8 @@ module.exports = (env, argv) => {
       ],
       devServer: {
         port: 8083,
-        contentBase: path.resolve(__dirname, 'build/react'),
+        contentBase: path.resolve(__dirname, 'build'),
+        historyApiFallback: true,
         compress: true,
         hot: true,
       },
