@@ -36,6 +36,7 @@ module.exports = (env, argv) => {
                 options: {
                   name: '[name]-[hash:5].min.[ext]',
                   limit: 8192,
+                  esModule: false,
                 },
               },
             ],
@@ -107,6 +108,7 @@ module.exports = (env, argv) => {
                 options: {
                   name: '[name]-[hash:5].min.[ext]',
                   limit: 8192,
+                  esModule: false,
                 },
               },
             ],

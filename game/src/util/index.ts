@@ -46,21 +46,22 @@ export function getSwaps(serialNumber: number[]): string | false {
     })
     .join('');
   const q: QueueItem[] = [new QueueItem(nowString, '')];
-  const seenStringList: string[] = [nowString];
+  const seenStringSet = new Set<string>();
+  seenStringSet.add(nowString);
   let maxPath = 0;
   while (q.length !== 0) {
     const qItem = q.shift();
     if (maxPath < qItem.swaps.length) {
       maxPath = qItem.swaps.length;
-      console.log(maxPath, seenStringList.length);
+      console.log(maxPath, seenStringSet.size);
     }
     if (qItem.nowString === targetString) {
       return qItem.swaps;
     }
     const newItemList = qItem.getNext();
     newItemList.forEach((newItem) => {
-      if (!seenStringList.includes(newItem.nowString)) {
-        seenStringList.push(newItem.nowString);
+      if (!seenStringSet.has(newItem.nowString)) {
+        seenStringSet.add(newItem.nowString);
         q.push(newItem);
       }
     });
