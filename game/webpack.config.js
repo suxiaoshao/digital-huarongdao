@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCss = require('mini-css-extract-plugin');
 const OptimizationCss = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 module.exports = (env, argv) => {
   console.log('---', env || argv.mode, '---');
   const devMode = argv.mode === 'development' || env !== 'production';
@@ -118,7 +117,7 @@ module.exports = (env, argv) => {
       output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'build'),
-        publicPath: '.',
+        publicPath: './',
       },
       plugins: [
         new HtmlWebpackPlugin({
@@ -131,11 +130,6 @@ module.exports = (env, argv) => {
         new MiniCss(),
         new OptimizationCss(),
         new CleanWebpackPlugin(),
-        new CompressionPlugin({
-          algorithm: 'gzip',
-          threshold: 10240,
-          minRatio: 0.8,
-        }),
       ],
       optimization: {
         runtimeChunk: 'single',

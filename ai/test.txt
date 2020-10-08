@@ -1,0 +1,16 @@
+{"serial_number": [5, 2, 3, 4, 9, 7, 6, 8, 0], "swap_step": 20, "swap": [6, 2], "uuid": "1ad470eb697d4e7c89ee72ca4d84b01b"}
+{"serial_number": [0, 5, 4, 8, 7, 6, 9, 3, 1], "swap_step": 13, "swap": [5, 5], "uuid": "8d19598084b4471a84614ac1a71f34ea"}
+{"serial_number": [6, 4, 7, 2, 5, 0, 9, 1, 3], "swap_step": 4, "swap": [1, 3], "uuid": "c17e76bde4dc429ab7c117ec3df51f81"}
+{"serial_number": [2, 7, 1, 3, 5, 4, 0, 6, 8], "swap_step": 13, "swap": [3, 7], "uuid": "095b945b20d44f9eb4587217226eae25"}
+{"serial_number": [1, 6, 2, 0, 8, 4, 5, 3, 9], "swap_step": 18, "swap": [6, 6], "uuid": "26a21db38398404aa10b4da7a78176dd"}
+{"serial_number": [1, 3, 5, 8, 2, 7, 0, 9, 6], "swap_step": 1, "swap": [6, 1], "uuid": "ac220674f34a4cd082abcea13bee135e"}
+{"serial_number": [7, 0, 5, 2, 1, 3, 6, 8, 9], "swap_step": 5, "swap": [7, 6], "uuid": "bf210afcdf1446f3b7b9f0207bdceb67"}
+{"serial_number": [9, 4, 3, 1, 5, 6, 0, 7, 2], "swap_step": 6, "swap": [5, 2], "uuid": "c6630c1ea6424ce0861962edb2704c2f"}
+{"serial_number": [4, 3, 6, 2, 7, 0, 5, 9, 1], "swap_step": 8, "swap": [6, 6], "uuid": "86e02861932645fe9894d3552cbe875d"}
+{"serial_number": [0, 5, 9, 2, 4, 3, 8, 7, 1], "swap_step": 3, "swap": [5, 5], "uuid": "3c387a8a58d0476a91e92a6ef109f934"}
+{"serial_number": [3, 6, 2, 4, 5, 0, 7, 1, 8], "swap_step": 3, "swap": [5, 2], "uuid": "3794c0fff5f14ef2959c036e3107c178"}
+{"serial_number": [6, 2, 4, 5, 8, 3, 0, 9, 7], "swap_step": 17, "swap": [6, 3], "uuid": "385040ddfb8f4885b929ed81c365db4d"}
+{"serial_number": [2, 7, 5, 0, 4, 6, 9, 8, 3], "swap_step": 18, "swap": [6, 3], "uuid": "cf9fe7634a564ae7b2a703b34c6cf356"}
+{"serial_number": [9, 5, 6, 3, 2, 8, 7, 4, 0], "swap_step": 19, "swap": [8, 8], "uuid": "d0bb5b854808462c9152ed45c0f2146b"}
+{"serial_number": [8, 3, 1, 5, 4, 2, 7, 9, 0], "swap_step": 3, "swap": [6, 4], "uuid": "dd51961eb11e46e7a3b0e3ddfe7ef02e"}
+{"serial_number": [9, 4, 6, 0, 3, 1, 7, 8, 2], "swap_step": 14, "swap": [4, 1], "uuid": "a0efbf5d0ffb49d7b50fdd8b41ed3009"}
