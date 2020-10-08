@@ -78,8 +78,8 @@ class Ai(object):
             self.operations = bfs(self.serial_number)
         else:
             serial_number = deepcopy(self.serial_number)
-            serial_number[self.swap[0]], serial_number[self.swap[1]] = serial_number[self.swap[1]], serial_number[
-                self.swap[0]]
+            serial_number[self.swap[0] - 1], serial_number[self.swap[1] - 1] = \
+                serial_number[self.swap[1] - 1], serial_number[self.swap[0] - 1]
             self.operations = bfs(serial_number)
 
     def post(self) -> bool:
