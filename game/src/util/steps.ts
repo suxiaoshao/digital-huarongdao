@@ -13,12 +13,12 @@ const allowDict: string[] = ['w', 'd', 's', 'a'];
 
 class QueueItem {
   nowString: string;
-  swaps: string;
+  steps: string;
   zeroIndex: number;
 
-  constructor(now_string: string, swaps: string) {
+  constructor(now_string: string, steps: string) {
     this.nowString = now_string;
-    this.swaps = swaps;
+    this.steps = steps;
     this.zeroIndex = now_string.indexOf('0');
   }
 
@@ -29,7 +29,7 @@ class QueueItem {
         let nowString = this.nowString;
         nowString = nowString.slice(0, this.zeroIndex) + nowString[otherIndex] + nowString.slice(this.zeroIndex + 1);
         nowString = nowString.slice(0, otherIndex) + '0' + nowString.slice(otherIndex + 1);
-        const swaps = this.swaps + allowDict[value];
+        const swaps = this.steps + allowDict[value];
         newItemList.push(new QueueItem(nowString, swaps));
       }
     });
@@ -37,7 +37,7 @@ class QueueItem {
   }
 }
 
-export function getSwaps(serialNumber: number[]): string | false {
+export function getSteps(serialNumber: number[]): string | false {
   const nowString = serialNumber.join('');
   const targetString = new Array<number>(9)
     .fill(0)
@@ -51,12 +51,12 @@ export function getSwaps(serialNumber: number[]): string | false {
   let maxPath = 0;
   while (q.length !== 0) {
     const qItem = q.shift();
-    if (maxPath < qItem.swaps.length) {
-      maxPath = qItem.swaps.length;
+    if (maxPath < qItem.steps.length) {
+      maxPath = qItem.steps.length;
       console.log(maxPath, seenStringSet.size);
     }
     if (qItem.nowString === targetString) {
-      return qItem.swaps;
+      return qItem.steps;
     }
     const newItemList = qItem.getNext();
     newItemList.forEach((newItem) => {

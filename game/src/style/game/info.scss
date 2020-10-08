@@ -1,0 +1,32 @@
+$length: 40vw;
+
+.info {
+  flex: 0 0 $length;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: $length+1;
+  margin: 0.5vh;
+
+  .image {
+    flex: 0 0 $length;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+
+    > * {
+      flex: 0 0 ($length - 2);
+      height: ($length - 2);
+      display: block;
+      border-radius: 0.5vh;
+    }
+  }
+
+  .massage {
+    flex: 0 0 $length + 10;
+    height: ($length - 2);
+    margin: 0 1vw;
+    background-color: #7e8a9700;
+  }
+}

@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
       },
       output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'build/react'),
+        path: path.resolve(__dirname, 'build'),
       },
       plugins: [
         new HtmlWebpackPlugin({
@@ -117,7 +117,8 @@ module.exports = (env, argv) => {
       },
       output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'build/react'),
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '.',
       },
       plugins: [
         new HtmlWebpackPlugin({
