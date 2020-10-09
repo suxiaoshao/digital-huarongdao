@@ -82,7 +82,11 @@ class Ai(object):
             self.my_swap.reverse()
             self.operations = bfs(self.serial_number)
         else:
-            self.operations = bfs(self.serial_number, self.swap_step, self.swap)
+            if self.swap[0]==self.swap[1]:
+                self.my_swap=[1,2]
+                self.operations = bfs(self.serial_number, self.swap_step, self.my_swap)
+            else:
+                self.operations = bfs(self.serial_number, self.swap_step, self.swap)
 
     def post(self) -> bool:
         if self.is_solution:
