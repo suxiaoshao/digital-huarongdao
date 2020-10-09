@@ -17,10 +17,39 @@ allow_swap: List = [
 allow_dict: List[str] = ['w', 'd', 's', 'a']
 
 
+def swap_str(source_str: str, index1: int, index2: int) -> str:
+    target_str = deepcopy(source_str)
+    target_str = target_str[:index1] + source_str[index2] + target_str[index1 + 1:]
+    target_str = target_str[:index2] + source_str[index1] + target_str[index2 + 1:]
+    return target_str
+
+
+def is_solution(source_str: str) -> bool:
+    num = 0
+    test: List[int] = [int(i) for i in source_str]
+    test = list(filter(lambda x: x != 0, test))
+    for i, v1 in enumerate(test[:-1]):
+        for v2 in test[i + 1:]:
+            if v2 < v1:
+                num += 1
+    return True if num % 2 == 0 else False
+
+
+def get_not_zero_index_list(source_str: str) -> List[int]:
+    l: List[int] = []
+    for i, j in enumerate(source_str):
+        if j != "0":
+            l.append(i + 1)
+        if len(l) == 2:
+            break
+    return l
+
+
 class QueueItem(object):
-    def __init__(self, now_str: str, swaps: str):
+    def __init__(self, now_str: str, operations: str, swap: List[int]):
         self.now_str: str = now_str
-        self.swaps: str = swaps
+        self.operations: str = operations
+        self.swap: List[int] = swap
 
     def get_next(self) -> List:
         zero_index = self.now_str.find("0")
@@ -30,32 +59,10 @@ class QueueItem(object):
                 now_str = deepcopy(self.now_str)
                 now_str = now_str[:zero_index] + now_str[other_index] + now_str[zero_index + 1:]
                 now_str = now_str[:other_index] + '0' + now_str[other_index + 1:]
-                swaps = deepcopy(self.swaps)
-                swaps += allow_dict[i]
-                new_item_list.append(QueueItem(now_str, swaps))
+                operations = deepcopy(self.operations)
+                operations += allow_dict[i]
+                new_item_list.append(QueueItem(now_str, operations, deepcopy(self.swap)))
         return new_item_list
-
-
-def bfs(serial_number: List[int], swap_step: Union[None, int] = None, swap: Union[None, List[int]] = None) -> str:
-    now_str = ''.join(str(i) for i in serial_number)
-    target_str = ''.join(str(i) if i in serial_number else "0" for i in range(1, 10))
-    q = deque()
-    q.append(QueueItem(now_str, ''))
-    seen_str: Set[str] = set(now_str)
-    while q:
-        q_item: QueueItem = q.popleft()
-        if q_item.now_str == target_str:
-            return q_item.swaps
-        if swap_step is not None and swap_step == len(q_item.swaps):
-            q_item_now_str = deepcopy(q_item.now_str)
-            q_item_now_str = q_item_now_str[:swap[0] - 1] + q_item.now_str[swap[1] - 1] + q_item_now_str[swap[0]:]
-            q_item_now_str = q_item_now_str[:swap[1] - 1] + q_item.now_str[swap[0] - 1] + q_item_now_str[swap[1]:]
-            q_item.now_str = q_item_now_str
-        new_item_list: List[QueueItem] = q_item.get_next()
-        for new_item in new_item_list:
-            if new_item.now_str not in seen_str:
-                seen_str.add(new_item.now_str)
-                q.append(new_item)
 
 
 class Ai(object):
@@ -65,46 +72,19 @@ class Ai(object):
         self.swap: List[int] = swap
         self.my_swap: List[int] = []
         self.operations: str = ''
-        # 获取是否有解
-        num: int = 0
-        test = deepcopy(serial_number)
-        test = list(filter(lambda x: x != 0, test))
-        for i, v1 in enumerate(test[:-1]):
-            for v2 in test[i + 1:]:
-                if v2 < v1:
-                    num += 1
-        self.is_solution: bool = True if num % 2 == 0 else False
         self.uuid: str = uuid
 
     def get_steps(self):
-        if self.is_solution:
-            self.my_swap = [i for i in self.swap]
-            self.my_swap.reverse()
-            self.operations = bfs(self.serial_number)
-        else:
-            if self.swap[0]==self.swap[1]:
-                self.my_swap=[1,2]
-                self.operations = bfs(self.serial_number, self.swap_step, self.my_swap)
-            else:
-                self.operations = bfs(self.serial_number, self.swap_step, self.swap)
+        self.operations = self.bfs()
 
     def post(self) -> bool:
-        if self.is_solution:
-            result = {
-                "uuid": self.uuid,
-                "answer": {
-                    "operations": self.operations,
-                    "swap": self.my_swap
-                }
+        result = {
+            "uuid": self.uuid,
+            "answer": {
+                "operations": self.operations,
+                "swap": self.my_swap
             }
-        else:
-            result = {
-                "uuid": self.uuid,
-                "answer": {
-                    "operations": self.operations,
-                    "swap": []
-                }
-            }
+        }
         res = requests.post('http://47.102.118.1:8089/api/answer', json=result)
         try:
             result = res.json()['score']
@@ -113,3 +93,35 @@ class Ai(object):
         if not result:
             print(res.content)
         return result
+
+    def bfs(self) -> str:
+        now_str = ''.join(str(i) for i in self.serial_number)
+        target_str = ''.join(str(i) if i in self.serial_number else "0" for i in range(1, 10))
+        q = deque()
+        q.append(QueueItem(now_str, '', []))
+        seen_str: Set[str] = set(now_str)
+        while q:
+            q_item: QueueItem = q.popleft()
+            if q_item.now_str == target_str:
+                self.my_swap = q_item.swap
+                return q_item.operations
+            if self.swap_step == len(q_item.operations):
+                q_item.now_str = swap_str(q_item.now_str, self.swap[0] - 1, self.swap[1] - 1)
+                if not is_solution(q_item.now_str):
+                    if self.swap[1] != self.swap[0]:
+                        q_item.swap = deepcopy(self.swap)
+                    else:
+                        q_item.swap = get_not_zero_index_list(q_item.now_str)
+                        q_item.now_str = swap_str(q_item.now_str, q_item.swap[0] - 1, q_item.swap[1] - 1)
+            new_item_list: List[QueueItem] = q_item.get_next()
+            for new_item in new_item_list:
+                if new_item.now_str not in seen_str:
+                    seen_str.add(new_item.now_str)
+                    q.append(new_item)
+
+
+if __name__ == '__main__':
+    print(swap_str("213121", 2, 3))
+    print(is_solution('028439751'))
+    print(is_solution('357094628'))
+    print(get_not_zero_index_list('028439751'))

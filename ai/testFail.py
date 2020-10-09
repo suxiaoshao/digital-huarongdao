@@ -16,10 +16,10 @@ def main():
     #     ai = get_swaps.Ai(fail['serial_number'], fail['swap_step'], fail['swap'], fail['uuid'])
     #     ai.get_steps()
     #     print(ai.operations, ai.is_solution, ai.my_swap)
-    fail = fail_list[0]
+    fail = fail_list[1]
     ai = get_swaps.Ai(fail['serial_number'], fail['swap_step'], fail['swap'], fail['uuid'])
     ai.get_steps()
-    print(ai.operations, ai.is_solution, ai.my_swap, fail)
+    print(ai.operations, ai.my_swap, fail)
 
 
 if __name__ == '__main__':

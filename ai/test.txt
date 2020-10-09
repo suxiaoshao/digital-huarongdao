@@ -1,0 +1,6 @@
+{"serial_number": [5, 3, 1, 0, 2, 4, 6, 7, 9], "swap_step": 11, "swap": [5, 7], "uuid": "fdec181fe38c479b8afa8f4f3a7c56cc"}
+{"serial_number": [0, 4, 7, 8, 2, 5, 9, 1, 6], "swap_step": 9, "swap": [6, 2], "uuid": "02201bd04b96475ab78d80fa7f0d39f5"}
+{"serial_number": [3, 8, 1, 0, 2, 9, 6, 4, 5], "swap_step": 14, "swap": [5, 1], "uuid": "96bf7979cfc5470eb2c39c155f9df97a"}
+{"serial_number": [3, 0, 6, 4, 7, 2, 1, 5, 8], "swap_step": 8, "swap": [2, 6], "uuid": "7cb7899f5fa34d0c8a6d4839fe474d51"}
+{"serial_number": [7, 5, 9, 8, 2, 6, 0, 1, 4], "swap_step": 9, "swap": [9, 3], "uuid": "1d994edc20c94c9a8c6614848f239e57"}
+{"serial_number": [3, 6, 0, 1, 8, 4, 2, 9, 7], "swap_step": 11, "swap": [5, 9], "uuid": "bbfdadd813bf4a7fb57b38a20329f163"}

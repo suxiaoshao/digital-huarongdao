@@ -42,13 +42,13 @@ def test():
 
 
 def main():
-    test_num = 1000
+    test_num = 200
     true_num = 0
     for i in range(test_num):
         time.sleep(3)
         if test():
             true_num += 1
-            print(true_num / test_num)
+        print(f'{true_num} / {i+1}')
 
 
 if __name__ == "__main__":
