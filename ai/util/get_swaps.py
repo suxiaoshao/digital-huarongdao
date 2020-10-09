@@ -83,17 +83,27 @@ class Ai(object):
             self.operations = bfs(serial_number)
 
     def post(self) -> bool:
-        result = {
-            "uuid": self.uuid,
-            "answer": {
-                "operations": self.operations,
-                "swap": self.my_swap
+        if self.is_solution:
+            result = {
+                "uuid": self.uuid,
+                "answer": {
+                    "operations": self.operations,
+                    "swap": self.my_swap
+                }
             }
-        }
+        else:
+            result = {
+                "uuid": self.uuid,
+                "answer": {
+                    "operations": self.operations,
+                    "swap": []
+                }
+            }
         res = requests.post('http://47.102.118.1:8089/api/answer', json=result)
         try:
             result = res.json()['score']
         except:
-            print(res.content)
             result = False
+        if not result:
+            print(res.content)
         return result
