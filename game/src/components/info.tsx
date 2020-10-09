@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/game/info.scss';
-import { List, Paper, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import {List, Paper, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import { DirectionsWalk, QueryBuilder } from '@material-ui/icons';
 
 interface InfoProps {

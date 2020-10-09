@@ -1,4 +1,4 @@
-from typing import List, Set
+from typing import List, Set, Union
 from collections import deque
 from copy import deepcopy
 import requests
@@ -36,7 +36,7 @@ class QueueItem(object):
         return new_item_list
 
 
-def bfs(serial_number: List[int]) -> str:
+def bfs(serial_number: List[int], swap_step: Union[None, int] = None, swap: Union[None, List[int]] = None) -> str:
     now_str = ''.join(str(i) for i in serial_number)
     target_str = ''.join(str(i) if i in serial_number else "0" for i in range(1, 10))
     q = deque()
@@ -46,6 +46,11 @@ def bfs(serial_number: List[int]) -> str:
         q_item: QueueItem = q.popleft()
         if q_item.now_str == target_str:
             return q_item.swaps
+        if swap_step is not None and swap_step == len(q_item.swaps):
+            q_item_now_str = deepcopy(q_item.now_str)
+            q_item_now_str = q_item_now_str[:swap[0] - 1] + q_item.now_str[swap[1] - 1] + q_item_now_str[swap[0]:]
+            q_item_now_str = q_item_now_str[:swap[1] - 1] + q_item.now_str[swap[0] - 1] + q_item_now_str[swap[1]:]
+            q_item.now_str = q_item_now_str
         new_item_list: List[QueueItem] = q_item.get_next()
         for new_item in new_item_list:
             if new_item.now_str not in seen_str:
@@ -77,10 +82,7 @@ class Ai(object):
             self.my_swap.reverse()
             self.operations = bfs(self.serial_number)
         else:
-            serial_number = deepcopy(self.serial_number)
-            serial_number[self.swap[0] - 1], serial_number[self.swap[1] - 1] = \
-                serial_number[self.swap[1] - 1], serial_number[self.swap[0] - 1]
-            self.operations = bfs(serial_number)
+            self.operations = bfs(self.serial_number, self.swap_step, self.swap)
 
     def post(self) -> bool:
         if self.is_solution:

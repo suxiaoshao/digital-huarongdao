@@ -3,6 +3,10 @@ from typing import List, Dict
 from ai.util import get_swaps
 
 
+def test(serial_number: List[int], swap_step: int, swap: List[int], operations: str, my_swap: List[int]):
+    pass
+
+
 def main():
     fail_list: List[Dict] = []
     with open('test.txt', 'r', encoding='utf-8') as f:
