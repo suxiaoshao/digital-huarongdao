@@ -1,4 +1,4 @@
-const allowSwap: number[][] = [
+export const allowSwap: number[][] = [
   [-1, 1, 3, -1],
   [-1, 2, 4, 0],
   [-1, -1, 5, 1],
@@ -9,9 +9,9 @@ const allowSwap: number[][] = [
   [4, 8, -1, 6],
   [5, -1, -1, 7],
 ];
-const allowDict: string[] = ['w', 'd', 's', 'a'];
+export const allowDict: string[] = ['w', 'd', 's', 'a'];
 
-class QueueItem {
+export class QueueItem {
   nowString: string;
   steps: string;
   zeroIndex: number;
@@ -48,13 +48,8 @@ export function getSteps(serialNumber: number[]): string | false {
   const q: QueueItem[] = [new QueueItem(nowString, '')];
   const seenStringSet = new Set<string>();
   seenStringSet.add(nowString);
-  let maxPath = 0;
   while (q.length !== 0) {
     const qItem = q.shift();
-    if (maxPath < qItem.steps.length) {
-      maxPath = qItem.steps.length;
-      console.log(maxPath, seenStringSet.size);
-    }
     if (qItem.nowString === targetString) {
       return qItem.steps;
     }
