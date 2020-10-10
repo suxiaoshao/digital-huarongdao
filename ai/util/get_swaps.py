@@ -1,4 +1,4 @@
-from typing import List, Set, Union
+from typing import List, Set
 from collections import deque
 from copy import deepcopy
 import requests
@@ -108,8 +108,10 @@ class Ai(object):
             if self.swap_step == len(q_item.operations):
                 q_item.now_str = swap_str(q_item.now_str, self.swap[0] - 1, self.swap[1] - 1)
                 if not is_solution(q_item.now_str):
-                    if self.swap[1] != self.swap[0]:
+                    if self.swap[1] != self.swap[0] and q_item.now_str[self.swap[0] - 1] != "0" and\
+                            q_item.now_str[self.swap[1] - 1] != "0":
                         q_item.swap = deepcopy(self.swap)
+                        q_item.now_str = swap_str(q_item.now_str, q_item.swap[0] - 1, q_item.swap[1] - 1)
                     else:
                         q_item.swap = get_not_zero_index_list(q_item.now_str)
                         q_item.now_str = swap_str(q_item.now_str, q_item.swap[0] - 1, q_item.swap[1] - 1)

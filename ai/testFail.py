@@ -10,13 +10,14 @@ def test(serial_number: List[int], swap_step: int, swap: List[int], operations: 
 def main():
     fail_list: List[Dict] = []
     with open('test.txt', 'r', encoding='utf-8') as f:
-        while f.readline():
-            fail_list.append(json.loads(f.readline()))
+        while s:=f.readline():
+            print(s)
+            fail_list.append(json.loads(s))
     # for fail in fail_list:
     #     ai = get_swaps.Ai(fail['serial_number'], fail['swap_step'], fail['swap'], fail['uuid'])
     #     ai.get_steps()
     #     print(ai.operations, ai.is_solution, ai.my_swap)
-    fail = fail_list[1]
+    fail = fail_list[0]
     ai = get_swaps.Ai(fail['serial_number'], fail['swap_step'], fail['swap'], fail['uuid'])
     ai.get_steps()
     print(ai.operations, ai.my_swap, fail)
