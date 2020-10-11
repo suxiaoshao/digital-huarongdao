@@ -14,17 +14,20 @@ export interface GameData {
 export default function Game(): JSX.Element {
   const [src, setSrc] = useState<string>(imageList[0]);
   const [steps, setSteps] = useState<string>('');
+  const [serialNumber, setSerialNumber] = useState<number[]>([]);
   const myLocation = useLocation<GameData>();
   const myHistory = useHistory();
   useEffect(() => {
     if (myLocation.state === undefined) {
       myHistory.push('/');
+    } else {
+      setSerialNumber(myLocation.state.serialNumber);
     }
   }, [myHistory, myLocation]);
   return (
     <div className="game">
       <Info src={src} stepsNum={steps.length} swapStepsNum={10} />
-      <GameBase />
+      <GameBase serialNumber={serialNumber} src={src} />
     </div>
   );
 }
