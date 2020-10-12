@@ -1,12 +1,12 @@
 import React from 'react';
 import '../style/game/info.scss';
-import {List, Paper, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import { List, Paper, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { DirectionsWalk, QueryBuilder } from '@material-ui/icons';
 
 interface InfoProps {
   src: string;
   stepsNum: number;
-  swapStepsNum: number;
+  useTime: number;
 }
 
 export default function Info(props: InfoProps): JSX.Element {
@@ -27,7 +27,7 @@ export default function Info(props: InfoProps): JSX.Element {
             <ListItemIcon>
               <QueryBuilder />
             </ListItemIcon>
-            <ListItemText>还有 {props.swapStepsNum} 步交换</ListItemText>
+            <ListItemText>用时 {props.useTime}s </ListItemText>
           </ListItem>
         </List>
       </Paper>

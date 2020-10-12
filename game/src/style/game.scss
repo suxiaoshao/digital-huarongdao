@@ -5,4 +5,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  .start-button{
+    width: 60%;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 27px;
+    margin-bottom: 20px;
+  }
 }

@@ -7,7 +7,6 @@ export const imageList: string[] = [
   require('../../../source/d_ (2).jpg'),
   require('../../../source/D_.jpg'),
   require('../../../source/e_.jpg'),
-  require('../../../source/F_.jpg'),
   require('../../../source/g_.jpg'),
   require('../../../source/h_ (2).jpg'),
   require('../../../source/H_.jpg'),
