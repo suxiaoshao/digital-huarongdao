@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/game.scss';
 import Info from '../components/info';
 import { imageList } from '../util/config';

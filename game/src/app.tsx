@@ -3,6 +3,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './view/home';
 import Game from './view/game';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import Record from './view/record';
 
 export default function App(): JSX.Element {
   const theme = createMuiTheme({
@@ -19,6 +20,9 @@ export default function App(): JSX.Element {
           </Route>
           <Route path="/game">
             <Game />
+          </Route>
+          <Route path="/record">
+            <Record />
           </Route>
         </Switch>
       </ThemeProvider>
