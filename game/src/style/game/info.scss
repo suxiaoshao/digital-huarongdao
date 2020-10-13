@@ -1,32 +1,31 @@
-$length: 40vw;
-
 .info {
-  flex: 0 0 $length;
+  flex: 0 0 40vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-height: $length+1;
-  margin: 0.5vh;
-  width: 99vw;
+  margin: 0.5%;
+  width: 100%;
+  max-height: 200px;
 
   .image {
-    flex: 0 0 $length;
+    flex: 0 0 40%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0;
+    position: relative;
 
     > * {
-      flex: 0 0 ($length - 2);
-      height: ($length - 2);
+      flex: 0 0 95%;
+      width: 95%;
       display: block;
-      border-radius: 0.5vh;
+      border-radius: 0.5%;
     }
   }
 
   .massage {
-    flex: 0 0 $length + 10;
-    height: ($length - 2);
+    flex: 0 0 50%;
     margin: 0 1vw;
     background-color: #7e8a9700;
   }
