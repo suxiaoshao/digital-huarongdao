@@ -106,7 +106,7 @@ module.exports = (env, argv) => {
                 loader: 'url-loader',
                 options: {
                   name: '[name]-[hash:5].min.[ext]',
-                  limit: 8192,
+                  limit: 81920,
                   esModule: false,
                 },
               },

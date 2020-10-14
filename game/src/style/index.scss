@@ -18,3 +18,19 @@ body {
   background-image: url("https://pic1.zhimg.com/80/v2-bedd8506202a70a7e2cf92b6f5412e38_720w.jpg?source=1940ef5c");
   background-repeat: repeat;
 }
+* {
+  ::-webkit-scrollbar-thumb{
+    background-color: #ffffff40;
+  }
+  scrollbar-color:#ffffff40 transparent;
+  ::-webkit-scrollbar
+  {
+    width:8px;
+    height:8px;
+  }
+  scrollbar-width: 8px;
+
+  ::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,48 @@
+.record {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .list {
+    flex: 1 1 0;
+    overflow: auto;
+    color: #ffffff;
+    .list-item{
+      display: flex;
+      background-color: #ffffff00;
+      justify-content: space-around;
+      align-items: center;
+      .image{
+        width: 150px;
+        height: 150px;
+      }
+      .card-content{
+        padding: 0;
+      }
+    }
+  }
+  .empty{
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f6f5f5;
+  }
+
+  .button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+
+    .start-button {
+      width: 40%;
+      height: 50px;
+      border-radius: 10px;
+      font-size: 24px;
+      @media screen and (max-width: 370px) {
+        font-size: 22px;
+      }
+    }
+  }
+}

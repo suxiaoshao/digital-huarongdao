@@ -13,17 +13,29 @@ export default function Home(): JSX.Element {
         图片华容道
       </Typography>
       <img className="icon" alt="图片" src={require('../assets/3062795.svg') as string} />
-      <Button
-        variant="contained"
-        color="primary"
-        className="start-button"
-        onClick={() => {
-          const list = getGameData(22);
-          myHistory.push({ pathname: '/game', state: list });
-        }}
-      >
-        开始游戏
-      </Button>
+      <div className="button-group">
+        <Button
+          variant="contained"
+          color="primary"
+          className="start-button"
+          onClick={() => {
+            const list = getGameData(22);
+            myHistory.push({ pathname: '/game', state: list });
+          }}
+        >
+          开始游戏
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className="start-button"
+          onClick={() => {
+            myHistory.push('/record');
+          }}
+        >
+          查看战绩
+        </Button>
+      </div>
     </div>
   );
 }

@@ -3,11 +3,12 @@ import '../style/game/gameBase.scss';
 import { ImageMatrix } from '../util/image';
 import { allowDict, allowSwap } from '../util/prompt';
 import { ButtonBase } from '@material-ui/core';
+import { SerialNum } from '../view/game';
 
 interface GameBaseProps {
   src: string;
-  serialNumber: number[];
-  onSerialNumber: (newValue: number[], stepKey: string) => void;
+  serialNumber: SerialNum[];
+  onSerialNumber: (newValue: SerialNum[], stepKey: string) => void;
 }
 
 export default function GameBase(props: GameBaseProps): JSX.Element {
@@ -19,6 +20,9 @@ export default function GameBase(props: GameBaseProps): JSX.Element {
       await a.loadImage();
       setImageList(await a.getImageList());
     })();
+    return () => {
+      console.log('退出');
+    };
   }, [props.src]);
   return (
     <div className="game-base">

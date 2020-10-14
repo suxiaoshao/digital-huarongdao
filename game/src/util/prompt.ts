@@ -37,7 +37,7 @@ export class QueueItem {
   }
 }
 
-export function getSteps(serialNumber: number[]): string | false {
+export function getSteps(serialNumber: number[]): string | undefined {
   const nowString = serialNumber.join('');
   const targetString = new Array<number>(9)
     .fill(0)
@@ -61,5 +61,5 @@ export function getSteps(serialNumber: number[]): string | false {
       }
     });
   }
-  return false;
+  return undefined;
 }

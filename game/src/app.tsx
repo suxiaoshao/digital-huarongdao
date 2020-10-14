@@ -18,10 +18,10 @@ export default function App(): JSX.Element {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/game">
+          <Route path="/game" exact>
             <Game />
           </Route>
-          <Route path="/record">
+          <Route path="/record" exact>
             <Record />
           </Route>
         </Switch>
