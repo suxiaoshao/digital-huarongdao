@@ -1,7 +1,7 @@
 from typing import List, Set
 from collections import deque
 from copy import deepcopy
-import requests
+from ai.util import http_api
 
 allow_swap: List = [
     [-1, 1, 3, -1],
@@ -78,21 +78,7 @@ class Ai(object):
         self.operations = self.bfs()
 
     def post(self) -> bool:
-        result = {
-            "uuid": self.uuid,
-            "answer": {
-                "operations": self.operations,
-                "swap": self.my_swap
-            }
-        }
-        res = requests.post('http://47.102.118.1:8089/api/answer', json=result)
-        try:
-            result = res.json()['score']
-        except:
-            result = False
-        if not result:
-            print(res.content)
-        return result
+        return http_api.post_submit(self.uuid, self.operations, self.my_swap)
 
     def bfs(self) -> str:
         now_str = ''.join(str(i) for i in self.serial_number)
@@ -108,7 +94,7 @@ class Ai(object):
             if self.swap_step == len(q_item.operations):
                 q_item.now_str = swap_str(q_item.now_str, self.swap[0] - 1, self.swap[1] - 1)
                 if not is_solution(q_item.now_str):
-                    if self.swap[1] != self.swap[0] and q_item.now_str[self.swap[0] - 1] != "0" and\
+                    if self.swap[1] != self.swap[0] and q_item.now_str[self.swap[0] - 1] != "0" and \
                             q_item.now_str[self.swap[1] - 1] != "0":
                         q_item.swap = deepcopy(self.swap)
                         q_item.now_str = swap_str(q_item.now_str, q_item.swap[0] - 1, q_item.swap[1] - 1)

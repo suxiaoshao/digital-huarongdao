@@ -13,12 +13,12 @@ export const allowDict: string[] = ['w', 'd', 's', 'a'];
 
 export class QueueItem {
   nowString: string;
-  steps: string;
+  operations: string;
   zeroIndex: number;
 
   constructor(now_string: string, steps: string) {
     this.nowString = now_string;
-    this.steps = steps;
+    this.operations = steps;
     this.zeroIndex = now_string.indexOf('0');
   }
 
@@ -29,7 +29,7 @@ export class QueueItem {
         let nowString = this.nowString;
         nowString = nowString.slice(0, this.zeroIndex) + nowString[otherIndex] + nowString.slice(this.zeroIndex + 1);
         nowString = nowString.slice(0, otherIndex) + '0' + nowString.slice(otherIndex + 1);
-        const swaps = this.steps + allowDict[value];
+        const swaps = this.operations + allowDict[value];
         newItemList.push(new QueueItem(nowString, swaps));
       }
     });
@@ -51,7 +51,7 @@ export function getSteps(serialNumber: number[]): string | undefined {
   while (q.length !== 0) {
     const qItem = q.shift();
     if (qItem.nowString === targetString) {
-      return qItem.steps;
+      return qItem.operations;
     }
     const newItemList = qItem.getNext();
     newItemList.forEach((newItem) => {

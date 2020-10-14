@@ -18,6 +18,13 @@
       height: 40px;
       border-radius: 10px;
       font-size: 20px;
+      @media screen and (max-width: 380px) and(min-width: 350px) {
+        font-size: 18px;
+      }
+      @media screen and (max-width: 350px) {
+        font-size: 16px;
+        width: 33%;
+      }
     }
   }
 }

@@ -37,20 +37,20 @@ def post_start(uuid) -> dict:
     }
 
     res = requests.post(url, json=data)
-    if res.json()["success"]:  # 如果访问成功 将信息存到字典返回
+    if 'success' in res.json() and res.json()["success"]:  # 如果访问成功 将信息存到字典返回
         data_start = {
             "data": res.json()["data"],
             "uuid": res.json()["uuid"]
         }
         return data_start
     else:
-        return False
+        return {}
 
 
 # 接口描述：提交赛题答案的接口
 # 解释说明，请求接口时必须要这个队伍先访问/start开启了赛题挑战，获取该次挑战的uuid，才能允许访问/submit提交接口；
 # 当你提交的答案未通过时，返回的字段success为false
-def post_submit(start_uuid, operations, swap):
+def post_submit(start_uuid, operations, swap) -> bool:
     url = 'http://47.102.118.1:8089/api/challenge/submit'
     data = {
         "uuid": start_uuid,
@@ -67,7 +67,7 @@ def post_submit(start_uuid, operations, swap):
 
 # 接口描述：获取还未通过的题目，展示当前队伍还未挑战或通过的题目（今天之内创建的题目，不包含你自己出的以及你已经通过的题目）。
 # 字段含义可参考上面的接口说明。当前没有纪录时返回为[]。
-def get_problem() -> List:
+def get_not_answer_list() -> List:
     url = 'http://47.102.118.1:8089/api/team/problem/27'
     r = requests.get(url)
     return r.json()
@@ -82,4 +82,4 @@ if __name__ == '__main__':
     # ], 20, [1, 2])
     # start_uuid = post_start(uuid_list[2])
     # post_submit(start_uuid, "d", [])
-    get_problem()
+    get_not_answer_list()

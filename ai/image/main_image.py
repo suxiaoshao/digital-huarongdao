@@ -1,18 +1,36 @@
-import requests
-import json
 from base64 import b64decode
 from typing import List
 from ai.image import image
+import os
+from ai.util import http_api
+
+
+def read_source_image() -> List[image.MyImage]:
+    path = '../source'
+    path_list = os.listdir(path)
+    source_list: List[image.MyImage] = []
+    for i in path_list:
+        image_path = f'{path}/{i}'
+        with open(image_path, 'rb') as f:
+            source_list.append(image.MyImage(f.read()))
+    return source_list
+
+
+source_list = read_source_image()
 
 
 class MainImage(image.MyImage):
-    def __init__(self):
-        res = requests.get('http://47.102.118.1:8089/api/problem?stuid=031802228')
-        info_data = json.loads(res.content)
-        self.swap_step: int = info_data['step']
-        self.swap: List[int] = info_data['swap']
-        self.uuid: str = info_data['uuid']
-        super(MainImage, self).__init__(b64decode(info_data['img']))
+    def __init__(self, uuid: str):
+        res = http_api.post_start(uuid)
+        self.swap_step: int = res['data']['step']
+        self.swap: List[int] = res['data']['swap']
+        self.uuid: str = res['uuid']
+        super(MainImage, self).__init__(b64decode(res['data']['img']))
+        self.serial_number: List[int] = []
+        for i in source_list:
+            serial_number = self.get_serial_number(i)
+            if serial_number:
+                self.serial_number = serial_number
 
     def get_serial_number(self, other_image: image.MyImage) -> [List[int]]:
         flag_list: List[int] = [0] * len(self.cut_image)
