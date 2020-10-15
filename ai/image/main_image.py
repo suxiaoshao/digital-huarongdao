@@ -8,12 +8,12 @@ from ai.util import http_api
 def read_source_image() -> List[image.MyImage]:
     path = '../source'
     path_list = os.listdir(path)
-    source_list: List[image.MyImage] = []
+    src_list: List[image.MyImage] = []
     for i in path_list:
         image_path = f'{path}/{i}'
         with open(image_path, 'rb') as f:
-            source_list.append(image.MyImage(f.read()))
-    return source_list
+            src_list.append(image.MyImage(f.read()))
+    return src_list
 
 
 source_list = read_source_image()

@@ -1,5 +1,9 @@
 ## 概述
 
+![build](https://img.shields.io/badge/build-passing-brightgreen)
+![react](https://img.shields.io/badge/reacr-16.13.1-61DAFB)
+![python](https://img.shields.io/badge/puython-3.8.6-EFBF67)
+
 这是一个电子华容道项目,包括 ai ,game 两个部分.
 
 ai 部分是用来计算华容道算法, game 部分是设计的前端(h5) 华容道游戏.

@@ -44,7 +44,9 @@ function MyListItem(props: GameRecordItem): JSX.Element {
             setIsSource((value) => !value);
           }}
         >
-          <CardMedia image={isSource ? sourceSrc : disorderSrc} />
+          {sourceSrc !== '' && disorderSrc !== '' ? (
+            <CardMedia image={isSource ? sourceSrc : disorderSrc} />
+          ) : undefined}
         </CardActionArea>
         <CardContent className="card-content">
           <List>

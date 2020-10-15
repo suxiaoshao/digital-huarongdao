@@ -1,3 +1,16 @@
+@mixin image {
+  width: 150px;
+  height: 150px;
+  @media screen and (max-width: 350px) {
+    width: 120px;
+    height: 120px;
+  }
+  @media screen and (min-width: 500px) {
+    width: 180px;
+    height: 180px;
+  }
+}
+
 .record {
   display: flex;
   flex-direction: column;
@@ -15,18 +28,10 @@
       align-items: center;
 
       .image {
-        width: 150px;
-        height: 150px;
-        @media screen and (max-width: 350px) {
-          width: 120px;
-          height: 120px;
-        }
+        @include image;
 
         > * {
-          @media screen and (max-width: 350px) {
-            width: 120px;
-            height: 120px;
-          }
+          @include image;
         }
       }
 
