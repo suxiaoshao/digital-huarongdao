@@ -5,8 +5,9 @@ import json
 
 def main():
     not_answer_list = http_api.get_not_answer_list()
-    print(not_answer_list)
     success_num = 0
+    if len(not_answer_list) == 0:
+        print("空")
     for i in not_answer_list:
         image = main_image.MainImage(i['uuid'])
         ai = get_swaps.Ai(image.serial_number, image.swap_step, image.swap, image.uuid)

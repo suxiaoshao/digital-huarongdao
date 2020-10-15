@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GameRecordItem, getGameRecordList, clearGameRecord } from '../util/store';
 import {
   Button,
@@ -11,17 +11,41 @@ import {
   ListItemIcon,
   Divider,
   Typography,
+  CardActionArea,
 } from '@material-ui/core';
 import '../style/record.scss';
 import { useHistory } from 'react-router-dom';
 import { AccessAlarm, AlarmOn, DirectionsWalk } from '@material-ui/icons';
 import dayjs from 'dayjs';
+import { ImageMatrix } from '../util/image';
 
 function MyListItem(props: GameRecordItem): JSX.Element {
+  const [disorderSrc, setDisorderSrc] = useState<string>('');
+  const [sourceSrc, setSourceSrc] = useState<string>('');
+  const [isSource, setIsSource] = useState<boolean>(false);
+  useEffect(() => {
+    (async () => {
+      const image = new ImageMatrix(props.src);
+      await image.loadImage();
+      setDisorderSrc(await image.getDisorderEmpty(props.serialNumber));
+      setSourceSrc(await image.getImageEmpty(props.serialNumber));
+    })();
+    return () => {
+      URL.revokeObjectURL(disorderSrc);
+      URL.revokeObjectURL(sourceSrc);
+    };
+  }, [props.src, props.serialNumber]);
   return (
     <>
       <Card className="list-item" elevation={0}>
-        <CardMedia className={'image'} image={props.src} />
+        <CardActionArea
+          className={'image'}
+          onClick={() => {
+            setIsSource((value) => !value);
+          }}
+        >
+          <CardMedia image={isSource ? sourceSrc : disorderSrc} />
+        </CardActionArea>
         <CardContent className="card-content">
           <List>
             <ListItem>

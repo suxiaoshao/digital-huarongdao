@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 import { getRandomItem } from '../util/gameData';
 import { addGameRecord } from '../util/store';
 import { getSteps } from '../util/prompt';
+import { ImageMatrix } from '../util/image';
 
 export type SerialNum = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
@@ -21,6 +22,7 @@ export default function Game(): JSX.Element {
   const [serialNumber, setSerialNumber] = useState<SerialNum[]>([]);
   const [useTime, setUseTime] = useState<number>(0);
   const [timeId, setTimeId] = useState<number | undefined>(undefined);
+  const [emptySrc, setEmptySrc] = useState<string>('');
   const myLocation = useLocation<GameData>();
   const myHistory = useHistory();
   useEffect(() => {
@@ -43,6 +45,18 @@ export default function Game(): JSX.Element {
     };
   }, []);
   useEffect(() => {
+    if (myLocation.state !== undefined) {
+      (async () => {
+        const image = new ImageMatrix(src);
+        await image.loadImage();
+        setEmptySrc(await image.getImageEmpty(myLocation.state.serialNumber));
+      })();
+    }
+    return () => {
+      URL.revokeObjectURL(emptySrc);
+    };
+  }, [src]);
+  useEffect(() => {
     if (
       serialNumber.every((value, index) => {
         return value === index + 1 || value === 0;
@@ -50,7 +64,7 @@ export default function Game(): JSX.Element {
       serialNumber.length !== 0
     ) {
       addGameRecord({
-        serialNumber: serialNumber,
+        serialNumber: myLocation.state.serialNumber,
         steps: steps,
         useTime: useTime,
         src: src,
@@ -61,7 +75,7 @@ export default function Game(): JSX.Element {
   }, [serialNumber]);
   return (
     <div className="game">
-      <Info useTime={useTime} src={src} stepsNum={steps.length} />
+      <Info useTime={useTime} src={emptySrc} stepsNum={steps.length} />
       <GameBase
         serialNumber={serialNumber}
         src={src}

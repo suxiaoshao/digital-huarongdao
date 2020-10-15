@@ -21,7 +21,9 @@ export default function GameBase(props: GameBaseProps): JSX.Element {
       setImageList(await a.getImageList());
     })();
     return () => {
-      console.log('退出');
+      imageList.forEach((value) => {
+        URL.revokeObjectURL(value);
+      });
     };
   }, [props.src]);
   return (

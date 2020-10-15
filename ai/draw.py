@@ -23,12 +23,14 @@ class CreatQuestion(object):
         queue: Deque[get_swaps.QueueItem] = deque()
         queue.append(get_swaps.QueueItem(now_string, '', [1, 2]))
         request_list: List[get_swaps.QueueItem] = []
+        max_path = 0
         while len(queue) != 0:
             q_item = queue.popleft()
-            if len(q_item.operations) == 31:
+            if len(q_item.operations) == max_path:
                 request_list.append(q_item)
-            elif len(q_item.operations) > 31:
-                break
+            elif len(q_item.operations) > max_path:
+                max_path = len(q_item.operations)
+                request_list = [q_item]
             new_item_list: List[get_swaps.QueueItem] = q_item.get_next()
             for new_item in new_item_list:
                 if new_item.now_str not in seen_string:
