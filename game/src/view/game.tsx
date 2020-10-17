@@ -4,7 +4,8 @@ import Info from '../components/info';
 import { imageList } from '../util/config';
 import { useHistory, useLocation } from 'react-router-dom';
 import GameBase from '../components/gameBase';
-import { Button } from '@material-ui/core';
+import { Button, Snackbar } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { getRandomItem } from '../util/gameData';
 import { addGameRecord } from '../util/store';
 import { getSteps } from '../util/prompt';
@@ -34,6 +35,8 @@ export default function Game(): JSX.Element {
   const [tipOpen, setTipOpen] = useState<boolean>(false);
   // record dialog 是否打开
   const [recordOpen, setRecordOpen] = useState<boolean>(false);
+  // 成功
+  const [successOpen, setSuccessOpen] = useState<boolean>(false);
   // 路由数据
   const myLocation = useLocation<GameData>();
   // 路由控制器
@@ -87,18 +90,13 @@ export default function Game(): JSX.Element {
         window.clearInterval(timeId);
         setTimeId(undefined);
       }
-      addGameRecord({
-        serialNumber: myLocation.state.serialNumber,
-        steps: steps,
-        useTime: useTime,
-        src: src,
-        timeStamp: new Date().getTime(),
-      });
-      myHistory.push('/record');
+      setSuccessOpen(true);
+      window.clearInterval(timeId);
     }
   }, [serialNumber]);
   return (
     <div className="game">
+      {/* 提示按钮对话框 */}
       <TipDialog
         serialNumber={serialNumber}
         src={src}
@@ -107,13 +105,36 @@ export default function Game(): JSX.Element {
           setTipOpen(false);
         }}
       />
+      {/* 战绩按钮对话框 */}
       <RecordDialog
         open={recordOpen}
         onClose={() => {
           setRecordOpen(false);
         }}
       />
+      {/* 成功消息条 */}
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={successOpen}
+        autoHideDuration={2000}
+        onClose={() => {
+          addGameRecord({
+            serialNumber: myLocation.state.serialNumber,
+            steps: steps,
+            useTime: useTime,
+            src: src,
+            timeStamp: new Date().getTime(),
+          });
+          myHistory.push('/record');
+        }}
+      >
+        <Alert elevation={6} variant="filled" severity="success">
+          成功挑战本题,将会跳转至战绩页
+        </Alert>
+      </Snackbar>
+      {/* 游戏上方页面信息 */}
       <Info useTime={useTime} src={emptySrc} stepsNum={steps.length} />
+      {/* 游戏主要区域 */}
       <GameBase
         serialNumber={serialNumber}
         src={src}
@@ -129,6 +150,7 @@ export default function Game(): JSX.Element {
           setSteps((value) => value + stepKey);
         }}
       />
+      {/* 按钮组 */}
       <div className="button-group">
         {timeId !== undefined ? (
           <Button
