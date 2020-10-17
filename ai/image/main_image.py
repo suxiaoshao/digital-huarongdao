@@ -1,12 +1,12 @@
 from base64 import b64decode
 from typing import List
-from ai.image import image
+from image import image
 import os
-from ai.util import http_api
+from util import http_api
 
 
 def read_source_image() -> List[image.MyImage]:
-    path = '../source'
+    path = './source'
     path_list = os.listdir(path)
     src_list: List[image.MyImage] = []
     for i in path_list:

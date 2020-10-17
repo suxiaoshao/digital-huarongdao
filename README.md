@@ -23,10 +23,18 @@ game 部分使用了 react material-ui 处理页面
 pip install -r requirements.txt
 ```
 
-安装完成后,在根目录下运行
+可以在 ai/util/http_api.py 文件中修改 token
+
+安装完成后,在根目录下运行以下命令出题
 
 ```bash
-python ./ai/test.py
+python ./ai/draw.py
+```
+
+在根目录下运行以下命令可以从 <http://47.102.118.1:8089/api/team/problem/27> 接口获取题目,然后解题提交
+
+```bash
+python ./ai/answerQuestions.py
 ```
 
 ## game 部分使用

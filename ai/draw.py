@@ -1,7 +1,11 @@
 import random
-from ai.util import get_swaps, http_api
+from util import get_swaps, http_api
 from collections import deque
 from typing import Deque, Set, List
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
 
 
 class CreatQuestion(object):

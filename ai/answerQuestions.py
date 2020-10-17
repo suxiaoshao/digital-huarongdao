@@ -1,6 +1,10 @@
-from ai.util import http_api, get_swaps
-from ai.image import main_image
+from util import http_api, get_swaps
+from image import main_image
 import json
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../../')
 
 
 def main():

@@ -1,7 +1,7 @@
 from typing import List, Set
 from collections import deque
 from copy import deepcopy
-from ai.util import http_api
+from util import http_api
 
 allow_swap: List = [
     [-1, 1, 3, -1],

@@ -1,14 +1,16 @@
 import requests
 from typing import List
 
+token = 'e18ed0b5-818a-43ec-9042-22abb5622840'
+
 
 def get_list():
     url = 'http://47.102.118.1:8089//api/challenge/list'
     r = requests.get(url)
-    l = []
+    s = []
     for i in r.json():
-        l.append(i['uuid'])
-    return l
+        s.append(i['uuid'])
+    return s
 
 
 def post_create(letter: str, exclude: int, challenge: List[List[int]], step: int, swap: List[int]):
@@ -22,7 +24,7 @@ def post_create(letter: str, exclude: int, challenge: List[List[int]], step: int
             "step": step,  # step为强制交换的步数
             "swap": swap  # swap为强制交换的图片（从左到右从上到下编号1-9）
         },
-        "token": "e18ed0b5-818a-43ec-9042-22abb5622840"
+        "token": token
     }
     res = requests.post(url, json=data)
     print(res.json())
@@ -33,7 +35,7 @@ def post_start(uuid) -> dict:
     url = url + uuid
     data = {
         "teamid": 27,
-        "token": "e18ed0b5-818a-43ec-9042-22abb5622840"
+        "token": token
     }
 
     res = requests.post(url, json=data)
@@ -55,7 +57,7 @@ def post_submit(start_uuid, operations, swap) -> bool:
     data = {
         "uuid": start_uuid,
         "teamid": 27,
-        "token": "e18ed0b5-818a-43ec-9042-22abb5622840",
+        "token": token,
         "answer": {
             "operations": operations,
             "swap": swap
