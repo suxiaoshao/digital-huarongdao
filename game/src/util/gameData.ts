@@ -11,17 +11,18 @@ export function getRandom(start: number, end: number): number {
   return start + parseInt(String(Math.random() * (end + 1 - start)));
 }
 
-export function bsf(serialNumber: SerialNum[], steps: number): GameData {
+export function bsf(serialNumber: SerialNum[]): GameData {
   const nowString = serialNumber.map<string>((value) => String(value)).join('');
   const seenStringSet: Set<string> = new Set<string>(nowString);
   const queue: QueueItem[] = [new QueueItem(nowString, '')];
   const resultList: QueueItem[] = [];
+  let maxSteps = 0;
   while (queue.length !== 0) {
     const qItem = queue.shift() as QueueItem;
-    if (qItem.operations.length === steps) {
+    if (qItem.operations.length === maxSteps) {
       resultList.push(qItem);
-    } else if (qItem.operations.length > steps) {
-      break;
+    } else if (qItem.operations.length > maxSteps) {
+      maxSteps = qItem.operations.length;
     }
     const newItemList = qItem.getNext();
     newItemList.forEach((newItem) => {
@@ -37,8 +38,8 @@ export function bsf(serialNumber: SerialNum[], steps: number): GameData {
   };
 }
 
-export function getGameData(stepNum: number): GameData {
+export function getGameData(): GameData {
   const serialNumber: SerialNum[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   serialNumber[getRandom(0, 8)] = 0;
-  return bsf(serialNumber, stepNum);
+  return bsf(serialNumber);
 }

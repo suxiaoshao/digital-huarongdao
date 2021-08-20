@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/home.scss';
 import { Button, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { getGameData, getRandom } from '../util/gameData';
+import { getGameData } from '../util/gameData';
 import { GameData } from './game';
 import logo2 from '../assets/logo2.svg';
 
@@ -20,7 +20,7 @@ export default function Home(): JSX.Element {
           color="primary"
           className="start-button"
           onClick={() => {
-            const list = getGameData(getRandom(10, 22));
+            const list = getGameData();
             myHistory.push({ pathname: '/game', state: list });
           }}
         >

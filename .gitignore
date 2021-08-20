@@ -3,3 +3,6 @@
 node_modules
 dist
 build
+target
+Cargo.lock
+/game/wasm/pkg
