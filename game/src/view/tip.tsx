@@ -41,7 +41,7 @@ export default function Tip(): JSX.Element {
       setSerialNumber(myLocation.state.serialNumber);
       setSteps(getSteps(myLocation.state.serialNumber) ?? '');
     }
-  }, [myLocation]);
+  }, [myHistory, myLocation]);
   // 获取挖空图片
   useEffect(() => {
     if (myLocation.state !== undefined) {
@@ -54,7 +54,7 @@ export default function Tip(): JSX.Element {
     return () => {
       URL.revokeObjectURL(emptySrc);
     };
-  }, []);
+  }, [emptySrc, myLocation.state]);
   return (
     <div className="tip">
       <div className="info">

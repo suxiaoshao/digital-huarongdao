@@ -17,7 +17,7 @@ export function bsf(serialNumber: SerialNum[], steps: number): GameData {
   const queue: QueueItem[] = [new QueueItem(nowString, '')];
   const resultList: QueueItem[] = [];
   while (queue.length !== 0) {
-    const qItem = queue.shift();
+    const qItem = queue.shift() as QueueItem;
     if (qItem.operations.length === steps) {
       resultList.push(qItem);
     } else if (qItem.operations.length > steps) {

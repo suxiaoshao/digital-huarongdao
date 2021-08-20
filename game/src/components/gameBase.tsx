@@ -25,6 +25,7 @@ export default function GameBase(props: GameBaseProps): JSX.Element {
         URL.revokeObjectURL(value);
       });
     };
+    /* eslint-disable */
   }, [props.src]);
   return (
     <div className="game-base">

@@ -34,6 +34,7 @@ function MyListItem(props: GameRecordItem): JSX.Element {
       URL.revokeObjectURL(disorderSrc);
       URL.revokeObjectURL(sourceSrc);
     };
+    /* eslint-disable */
   }, [props.src, props.serialNumber]);
   return (
     <>

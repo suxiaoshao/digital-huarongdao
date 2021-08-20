@@ -7,7 +7,7 @@ export function setupCanvas(canvas: HTMLCanvasElement, width: number, height: nu
   const rect = canvas.getBoundingClientRect();
   canvas.width = (rect.width || canvas.width) * dpr;
   canvas.height = (rect.height || canvas.height) * dpr;
-  return canvas.getContext('2d');
+  return canvas.getContext('2d') as CanvasRenderingContext2D;
 }
 
 export class ImageMatrix {
@@ -16,14 +16,15 @@ export class ImageMatrix {
 
   constructor(src: string) {
     this.src = src;
+    this.canvas = document.createElement('canvas');
   }
 
   public async loadImage(): Promise<void> {
     const promise = new Promise<HTMLCanvasElement>((resolve) => {
       const image = new Image();
       image.src = this.src;
-      const canvas = document.createElement('canvas');
       let context: CanvasRenderingContext2D;
+      const canvas = this.canvas;
       if (image.complete) {
         context = setupCanvas(canvas, image.width, image.height);
         context.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height);
@@ -40,11 +41,11 @@ export class ImageMatrix {
   }
 
   public async cutImage(beginX: number, beginY: number, width: number, height: number): Promise<string> {
-    let context = this.canvas.getContext('2d');
+    let context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     const imageData = context.getImageData(beginX, beginY, width, height);
     const canvas = document.createElement('canvas');
     context = setupCanvas(canvas, width, height);
-    context.putImageData(imageData, 0, 0);
+    context.putImageData(imageData as ImageData, 0, 0);
     const promise = new Promise<string>((resolve) => {
       canvas.toBlob((imageBlob) => {
         const newUrl = URL.createObjectURL(imageBlob);
@@ -67,7 +68,7 @@ export class ImageMatrix {
   }
 
   public async getImageEmpty(serialNumber: SerialNum[]): Promise<string> {
-    let emptyNum: SerialNum;
+    let emptyNum: SerialNum = 0;
     for (let i = 0; i < 9; i++) {
       if (!serialNumber.includes(<SerialNum>(i + 1))) {
         emptyNum = <SerialNum>i;
@@ -75,7 +76,7 @@ export class ImageMatrix {
     }
     const row = Math.floor(emptyNum / 3);
     const col = emptyNum % 3;
-    let context = this.canvas.getContext('2d');
+    let context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     const imageData = context.getImageData(0, 0, this.canvas.width, this.canvas.height);
     const canvas = document.createElement('canvas');
     context = setupCanvas(canvas, this.canvas.width, this.canvas.height);
@@ -97,7 +98,7 @@ export class ImageMatrix {
     const imageDataList: ImageData[] = [];
     const width = this.canvas.width / 3;
     const height = this.canvas.height / 3;
-    let context = this.canvas.getContext('2d');
+    let context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         imageDataList.push(context.getImageData(j * width, i * height, width, height));

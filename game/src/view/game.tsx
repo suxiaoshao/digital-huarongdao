@@ -62,7 +62,7 @@ export default function Game(): JSX.Element {
         setTimeId(undefined);
       }
     };
-  }, []);
+  }, [myHistory, myLocation.state, timeId]);
 
   // 获取挖空图片
   useEffect(() => {
@@ -76,6 +76,7 @@ export default function Game(): JSX.Element {
     return () => {
       URL.revokeObjectURL(emptySrc);
     };
+    /* eslint-disable */
   }, [src]);
 
   // 用户成功
