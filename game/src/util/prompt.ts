@@ -49,7 +49,7 @@ export function getSteps(serialNumber: number[]): string | undefined {
   const seenStringSet = new Set<string>();
   seenStringSet.add(nowString);
   while (q.length !== 0) {
-    const qItem = q.shift();
+    const qItem = q.shift() as QueueItem;
     if (qItem.nowString === targetString) {
       return qItem.operations;
     }

@@ -12,9 +12,7 @@ export function getRandom(start: number, end: number): number {
 }
 
 export function bsf(serialNumber: SerialNum[], steps: number): GameData {
-  const nowString = serialNumber
-    .map<string>((value) => String(value))
-    .join('');
+  const nowString = serialNumber.map<string>((value) => String(value)).join('');
   const seenStringSet: Set<string> = new Set<string>(nowString);
   const queue: QueueItem[] = [new QueueItem(nowString, '')];
   const resultList: QueueItem[] = [];

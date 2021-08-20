@@ -4,6 +4,7 @@ import { Button, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { getGameData, getRandom } from '../util/gameData';
 import { GameData } from './game';
+import logo2 from '../assets/logo2.svg';
 
 export default function Home(): JSX.Element {
   const myHistory = useHistory<GameData>();
@@ -12,7 +13,7 @@ export default function Home(): JSX.Element {
       <Typography className="name" variant="h3">
         图片华容道
       </Typography>
-      <img className="icon" alt="图片" src={require('../assets/3062795.svg') as string} />
+      <img className="icon" alt="图片" src={logo2} />
       <div className="button-group">
         <Button
           variant="contained"

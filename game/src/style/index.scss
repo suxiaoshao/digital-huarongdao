@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -6,7 +8,7 @@ html, body, #root {
 }
 
 html {
-  background-color: #37474F;
+  background-color: #37474f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,22 +17,21 @@ html {
 body {
   max-width: 500px;
   max-height: 900px;
-  background-image: url("https://pic1.zhimg.com/80/v2-bedd8506202a70a7e2cf92b6f5412e38_720w.jpg?source=1940ef5c");
+  background-image: url('https://pic1.zhimg.com/80/v2-bedd8506202a70a7e2cf92b6f5412e38_720w.jpg?source=1940ef5c');
   background-repeat: repeat;
 }
 * {
-  ::-webkit-scrollbar-thumb{
+  ::-webkit-scrollbar-thumb {
     background-color: #ffffff40;
   }
-  scrollbar-color:#ffffff40 transparent;
-  ::-webkit-scrollbar
-  {
-    width:8px;
-    height:8px;
+  scrollbar-color: #ffffff40 transparent;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
   scrollbar-width: 8px;
 
-  ::-webkit-scrollbar-thumb{
+  ::-webkit-scrollbar-thumb {
     border-radius: 4px;
   }
 }

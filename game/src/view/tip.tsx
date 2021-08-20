@@ -39,7 +39,7 @@ export default function Tip(): JSX.Element {
       myHistory.push('/');
     } else {
       setSerialNumber(myLocation.state.serialNumber);
-      setSteps(getSteps(myLocation.state.serialNumber));
+      setSteps(getSteps(myLocation.state.serialNumber) ?? '');
     }
   }, [myLocation]);
   // 获取挖空图片

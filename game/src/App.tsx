@@ -2,12 +2,12 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './view/home';
 import Game from './view/game';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { ThemeProvider, createTheme } from '@material-ui/core';
 import Record from './view/record';
 import Tip from './view/tip';
 
 export default function App(): JSX.Element {
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: 'dark',
     },
