@@ -6,3 +6,4 @@ build
 target
 Cargo.lock
 /game/wasm/pkg
+.DS_Store

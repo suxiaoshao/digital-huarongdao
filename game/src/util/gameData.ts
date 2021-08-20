@@ -15,7 +15,7 @@ export function bsf(serialNumber: SerialNum[]): GameData {
   const nowString = serialNumber.map<string>((value) => String(value)).join('');
   const seenStringSet: Set<string> = new Set<string>(nowString);
   const queue: QueueItem[] = [new QueueItem(nowString, '')];
-  const resultList: QueueItem[] = [];
+  let resultList: QueueItem[] = [];
   let maxSteps = 0;
   while (queue.length !== 0) {
     const qItem = queue.shift() as QueueItem;
@@ -23,6 +23,7 @@ export function bsf(serialNumber: SerialNum[]): GameData {
       resultList.push(qItem);
     } else if (qItem.operations.length > maxSteps) {
       maxSteps = qItem.operations.length;
+      resultList = [qItem];
     }
     const newItemList = qItem.getNext();
     newItemList.forEach((newItem) => {

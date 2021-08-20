@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { getGameData } from '../util/gameData';
 import { GameData } from './game';
 import logo2 from '../assets/logo2.svg';
+import { GameData as WasmGameData } from '../util/wasm';
 
 export default function Home(): JSX.Element {
   const myHistory = useHistory<GameData>();
@@ -20,7 +21,13 @@ export default function Home(): JSX.Element {
           color="primary"
           className="start-button"
           onClick={() => {
+            let date = Date.now();
             const list = getGameData();
+            console.log(Date.now() - date);
+            date = Date.now();
+            const gameData = WasmGameData.new().get_data();
+            console.log(Date.now() - date);
+            console.log(gameData);
             myHistory.push({ pathname: '/game', state: list });
           }}
         >
