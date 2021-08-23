@@ -11,6 +11,7 @@ import { addGameRecord } from '../util/store';
 import { getSteps } from '../util/prompt';
 import { ImageMatrix } from '../util/image';
 import { RecordDialog, TipDialog } from '../components/myDialog';
+import { GameData as WasmGameData } from '../util/wasm';
 
 export type SerialNum = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
@@ -47,22 +48,23 @@ export default function Game(): JSX.Element {
     if (myLocation.state === undefined) {
       myHistory.push('/');
     } else {
-      setSerialNumber(myLocation.state.serialNumber);
+      setSerialNumber([...myLocation.state.serialNumber]);
+      const gameData = WasmGameData.new([...myLocation.state.serialNumber]) as WasmGameData | undefined;
       console.log(
-        getSteps(myLocation.state.serialNumber)
-          ?.replace(/a/g, '左')
-          .replace(/w/g, '上')
-          .replace(/s/g, '下')
-          .replace(/d/g, '右'),
+        gameData?.get_steps()?.replace(/a/g, '左').replace(/w/g, '上').replace(/s/g, '下').replace(/d/g, '右'),
       );
     }
+    /* eslint-disable */
+  }, [myHistory, myLocation.state]);
+  /** 清空计时器 */
+  useEffect(() => {
     return () => {
       if (timeId !== undefined) {
         window.clearInterval(timeId);
         setTimeId(undefined);
       }
     };
-  }, [myHistory, myLocation.state, timeId]);
+  }, [timeId]);
 
   // 获取挖空图片
   useEffect(() => {

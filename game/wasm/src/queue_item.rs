@@ -1,5 +1,3 @@
-use crate::log;
-
 #[derive(Clone, Debug)]
 pub struct QueueItem {
     pub now_state: [u8; 9],

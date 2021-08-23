@@ -6,8 +6,9 @@ import { ImageMatrix } from '../util/image';
 import '../style/game/info.scss';
 import { Button, IconButton } from '@material-ui/core';
 import { ArrowBack, ArrowForward } from '@material-ui/icons';
-import { allowDict, allowSwap, getSteps } from '../util/prompt';
+import { allowDict, allowSwap } from '../util/prompt';
 import GameBase from '../components/gameBase';
+import { GameData } from '../util/wasm';
 
 const swapDict: {
   [prop: string]: string;
@@ -38,8 +39,8 @@ export default function Tip(): JSX.Element {
     if (myLocation.state === undefined) {
       myHistory.push('/');
     } else {
-      setSerialNumber(myLocation.state.serialNumber);
-      setSteps(getSteps(myLocation.state.serialNumber) ?? '');
+      setSerialNumber([...myLocation.state.serialNumber]);
+      setSteps(GameData.new([...myLocation.state.serialNumber])?.get_steps() ?? '');
     }
   }, [myHistory, myLocation]);
   // 获取挖空图片

@@ -273,6 +273,11 @@
   "resolved" "https://registry.nlark.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.0.tgz"
   "version" "1.2.0"
 
+"@iarna/toml@^2.2.5":
+  "integrity" "sha1-syNmyJtDxvjO+976x3i5yCjjuow="
+  "resolved" "https://registry.npm.taobao.org/@iarna/toml/download/@iarna/toml-2.2.5.tgz"
+  "version" "2.2.5"
+
 "@material-ui/core@^4.0.0", "@material-ui/core@^4.12.1", "@material-ui/core@^4.12.3":
   "integrity" "sha1-gNZlyvDx8DTlI1XFRQwOOLCZ08o="
   "resolved" "https://registry.nlark.com/@material-ui/core/download/@material-ui/core-4.12.3.tgz"
@@ -687,7 +692,7 @@
     "escape-string-regexp" "^1.0.5"
     "supports-color" "^5.3.0"
 
-"chalk@^4.0.0", "chalk@^4.1.0":
+"chalk@^4.0.0", "chalk@^4.1.0", "chalk@^4.1.1":
   "integrity" "sha1-qsTit3NKdAhnrrFr8CqtVWoeegE="
   "resolved" "https://registry.nlark.com/chalk/download/chalk-4.1.2.tgz?cache=0&sync_timestamp=1627646655305&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fchalk%2Fdownload%2Fchalk-4.1.2.tgz"
   "version" "4.1.2"
@@ -1081,7 +1086,7 @@
   "resolved" "https://registry.npm.taobao.org/fast-diff/download/fast-diff-1.2.0.tgz"
   "version" "1.2.0"
 
-"fast-glob@^3.1.1":
+"fast-glob@^3.1.1", "fast-glob@^3.2.7":
   "integrity" "sha1-/Wy3otfpqnp4RhEehaGW1rL3ZqE="
   "resolved" "https://registry.nlark.com/fast-glob/download/fast-glob-3.2.7.tgz"
   "version" "3.2.7"
@@ -1953,6 +1958,17 @@
   optionalDependencies:
     "fsevents" "~2.3.2"
 
+"rsw-node@^1.0.0":
+  "integrity" "sha1-m8qj2aSdd3r+8F+NoUThCtsJYf8="
+  "resolved" "https://registry.nlark.com/rsw-node/download/rsw-node-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "chalk" "^4.1.1"
+    "debug" "^4.3.1"
+    "minimist" "^1.2.5"
+    "rimraf" "^3.0.2"
+    "which" "^2.0.2"
+
 "run-parallel@^1.1.9":
   "integrity" "sha1-ZtE2jae9+SHrnZW9GpIp5/IaQ+4="
   "resolved" "https://registry.nlark.com/run-parallel/download/run-parallel-1.2.0.tgz"
@@ -2202,14 +2218,17 @@
   "resolved" "https://registry.npm.taobao.org/value-equal/download/value-equal-1.0.1.tgz"
   "version" "1.0.1"
 
-"vite-plugin-rsw@^1.8.1":
-  "integrity" "sha1-Xq006x8K0+3bP2xYnI6TTbBJQBo="
-  "resolved" "https://registry.nlark.com/vite-plugin-rsw/download/vite-plugin-rsw-1.8.1.tgz"
-  "version" "1.8.1"
+"vite-plugin-rsw@^1.9.0":
+  "integrity" "sha1-P9jPlU3ZgCb019yiRstJElsRFkw="
+  "resolved" "https://registry.nlark.com/vite-plugin-rsw/download/vite-plugin-rsw-1.9.0.tgz"
+  "version" "1.9.0"
   dependencies:
+    "@iarna/toml" "^2.2.5"
     "chalk" "^4.1.0"
     "chokidar" "^3.5.0"
     "debug" "^4.3.2"
+    "fast-glob" "^3.2.7"
+    "rsw-node" "^1.0.0"
     "which" "^2.0.2"
 
 "vite@^2.4.4":
