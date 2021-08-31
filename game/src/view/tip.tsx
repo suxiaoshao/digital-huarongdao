@@ -40,7 +40,9 @@ export default function Tip(): JSX.Element {
       myHistory.push('/');
     } else {
       setSerialNumber([...myLocation.state.serialNumber]);
+      console.time('get_steps');
       setSteps(GameData.new([...myLocation.state.serialNumber])?.get_steps() ?? '');
+      console.timeEnd('get_steps');
     }
   }, [myHistory, myLocation]);
   // 获取挖空图片

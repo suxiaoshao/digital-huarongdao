@@ -20,7 +20,9 @@ export default function Home(): JSX.Element {
           color="primary"
           className="start-button"
           onClick={() => {
+            console.time('random');
             const gameData = WasmGameData.random().get_data();
+            console.timeEnd('random');
             myHistory.push({ pathname: '/game', state: gameData });
           }}
         >

@@ -8,7 +8,6 @@ import { Button, Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { getRandomItem } from '../util/gameData';
 import { addGameRecord } from '../util/store';
-import { getSteps } from '../util/prompt';
 import { ImageMatrix } from '../util/image';
 import { RecordDialog, TipDialog } from '../components/myDialog';
 import { GameData as WasmGameData } from '../util/wasm';
@@ -49,10 +48,6 @@ export default function Game(): JSX.Element {
       myHistory.push('/');
     } else {
       setSerialNumber([...myLocation.state.serialNumber]);
-      const gameData = WasmGameData.new([...myLocation.state.serialNumber]) as WasmGameData | undefined;
-      console.log(
-        gameData?.get_steps()?.replace(/a/g, '左').replace(/w/g, '上').replace(/s/g, '下').replace(/d/g, '右'),
-      );
     }
     /* eslint-disable */
   }, [myHistory, myLocation.state]);
@@ -106,6 +101,12 @@ export default function Game(): JSX.Element {
         open={tipOpen}
         onClose={() => {
           setTipOpen(false);
+          console.time('get_steps');
+          const gameData = WasmGameData.new([...myLocation.state.serialNumber]) as WasmGameData | undefined;
+          console.log(
+            gameData?.get_steps()?.replace(/a/g, '左').replace(/w/g, '上').replace(/s/g, '下').replace(/d/g, '右'),
+          );
+          console.timeEnd('get_steps');
         }}
       />
       {/* 战绩按钮对话框 */}
