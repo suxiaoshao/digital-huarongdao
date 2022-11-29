@@ -1,15 +1,16 @@
 [package]
 name = "wasm"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.127", features = ["derive"] }
-wasm-bindgen = { version = "0.2.76", features = ["serde-serialize"] }
-js-sys = "0.3.53"
-web-sys = { version = "0.3.53", features = ['Document', 'Element', 'HtmlElement', 'Node', 'Window', ] }
+serde = { version = "1.0.147", features = ["derive"] }
+wasm-bindgen = { version = "0.2.83", features = ["serde-serialize"] }
+js-sys = "0.3.60"
+web-sys = { version = "0.3.60", features = ['Document', 'Element', 'HtmlElement', 'Node', 'Window', ] }
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 serde_json = "1.0.66"

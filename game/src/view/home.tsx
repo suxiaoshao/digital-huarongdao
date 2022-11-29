@@ -4,7 +4,8 @@ import { Button, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { GameData } from './game';
 import logo2 from '../assets/logo2.svg';
-import { GameData as WasmGameData } from '../util/wasm';
+import { GameData as WasmGameData, StringGameData } from '../util/wasm';
+import { getGameData } from '../util/gameData';
 
 export default function Home(): JSX.Element {
   const myHistory = useHistory<GameData>();
@@ -18,6 +19,7 @@ export default function Home(): JSX.Element {
         <Button
           variant="contained"
           color="primary"
+          size="large"
           className="start-button"
           onClick={() => {
             console.time('random');
@@ -26,11 +28,40 @@ export default function Home(): JSX.Element {
             myHistory.push({ pathname: '/game', state: gameData });
           }}
         >
-          开始游戏
+          wasm
         </Button>
         <Button
           variant="contained"
           color="primary"
+          size="large"
+          className="start-button"
+          onClick={() => {
+            console.time('random');
+            const gameData = StringGameData.random().get_data();
+            console.timeEnd('random');
+            myHistory.push({ pathname: '/game', state: gameData });
+          }}
+        >
+          wasm string
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          className="start-button"
+          onClick={() => {
+            console.time('random');
+            const gameData = getGameData();
+            console.timeEnd('random');
+            myHistory.push({ pathname: '/game', state: gameData });
+          }}
+        >
+          js string
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
           className="start-button"
           onClick={() => {
             myHistory.push('/record');

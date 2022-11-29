@@ -20,14 +20,14 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     .start-button {
       width: 40%;
       height: 50px;
       border-radius: 10px;
-      font-size: 24px;
-      @media screen and (max-width: 370px) {
-        font-size: 22px;
-      }
+      font-size: 18px;
+      text-transform: none;
+      margin-top: 20px;
     }
   }
 }
